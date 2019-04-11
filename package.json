@@ -1,0 +1,18 @@
+{
+  "name": "dps-certgen",
+  "version": "0.0.3",
+  "description": "x509 Certificate Helper Tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint ./**/*.js && cd test && ./test.sh"
+  },
+  "author": "Oguz Bastemur",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.3.3",
+    "node-forge": "^0.8.2"
+  },
+  "bin": {
+    "dps-certgen": "./index.js"
+  }
+}

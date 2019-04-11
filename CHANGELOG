@@ -1,0 +1,15 @@
+### 0.0.2
+
+Implement
+--new-config  : creates a new 'certgen.config.json' file (overwrites the existing one)
+--new-root-cert : creates a new root certificate that is based on 'certgen.config.json'
+--new-leaf-cert <subject> : creates a new certificate and signs it with the root certificate's private key
+
+--is2K : use 2048 bits. default 4096 bits
+
+and test cases.
+
+### 0.0.3
+
+- Remove basicConstraints from the base certificate configuration. (cA)
+- Remove other unrelated certificate extensions from the base certificate configuration
