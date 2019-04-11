@@ -1,14 +1,77 @@
+## x509 Certificate Helper Tool
 
-# Contributing
+- need an easy to use x509 certificate tool ?
+- don't have OpenSSL cli or don't know how to use it ?
+- all of the above ?
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
+### Requirements
 
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+node.js version 8+
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+### Install
+
+```
+npm i -g dps-certgen
+```
+
+### Usage
+
+```
+dps-certgen <args>
+
+args:
+--new-config  : creates a new 'certgen.config.json' file (overwrites the existing one)
+--new-root-cert : creates a new root certificate that is based on 'certgen.config.json'
+--new-leaf-cert <subject> : creates a new certificate and signs it with the root certificate's private key
+
+--is2K : use 2048 bits (not suggested). default 4096 bits
+
+i.e. => dps-certgen --new-root-cert
+```
+
+### Sample usage
+
+#### Create a new X509 root certificate
+
+Create a new certificate configuration file
+```
+dps-certgen --new-config
+```
+
+Edit `certgen.config.json` file on the path.
+
+Create a new x509 certificate / public and private keys
+```
+dps-certgen --new-root-cert
+```
+
+Command above will create `root-cert.pem`, `root-public-key.pem`, and `root-private-key.pem`
+on the path.
+
+
+#### Verify a root certificate
+
+If any platform asks you to verify your certificate, it will give you a verification key to do that.
+
+Run the command below on your favorite terminal.
+Make sure `root-cert.pem`, `root-public-key.pem`, and `root-private-key.pem` are already on the path.
+```
+dps-certgen --new-leaf-cert PUT_THAT_VERIFICATION_KEY_HERE
+```
+
+Command above will create `subject-cert.pem`, `subject-public-key.pem`, and `subject-private-key.pem`
+on the path.
+
+Use `subject-cert.pem` in order to verify the ownership.
+
+#### Create a device certificate
+
+Make sure `root-cert.pem`, `root-public-key.pem`, and `root-private-key.pem` are already on the path.
+```
+dps-certgen --new-leaf-cert PUT_DEVICE_ID_HERE
+```
+
+Command above will create `subject-cert.pem`, `subject-public-key.pem`, and `subject-private-key.pem`
+on the path.
+
+Use `subject-cert.pem` as device certificate and `subject-private-key.pem` as the private key.
