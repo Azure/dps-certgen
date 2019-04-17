@@ -29,6 +29,11 @@ args:
 i.e. => dps-certgen --new-root-cert
 ```
 
+### Sample apps
+
+- [Azure IoT x509 C SDK client example](./samples/azure-iot-c-sdk/)
+- [Azure IoT x509 Python client example](./samples/python/)
+
 ### Sample usage
 
 #### Create a new X509 root certificate
